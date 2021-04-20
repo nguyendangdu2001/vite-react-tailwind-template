@@ -2,9 +2,7 @@
 
 This project was bootstrapped with [Vite].
 
-## Available Scripts
-
-This project use
+## This project use
 
 ### React-query
 
@@ -39,6 +37,10 @@ Your app is ready to be deployed!
 ### `yarn analyze`
 
 Analyze the bundle size
+
+### `yarn serve`
+
+preview your production build
 
 ## Learn More
 
