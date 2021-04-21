@@ -15,7 +15,7 @@ export const errorReducer = (state = {}, action) => {
     // e.g. stores errorMessage when receiving GET_TODOS_FAILURE
     //      else clear errorMessage when receiving GET_TODOS_REQUEST
     [requestName.toLowerCase()]: ["FAILURE", "ERROR"].includes(requestState)
-      ? payload?.message
+      ? payload?.response?.data?.message || payload?.message || payload
       : "",
   };
 };

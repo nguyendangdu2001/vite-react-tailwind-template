@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 
@@ -40,7 +40,7 @@ const Pagination = ({
   );
 };
 
-export default styled(Pagination)`
+export default styled(memo(Pagination))`
   .pagination {
     display: flex;
     justify-content: center;

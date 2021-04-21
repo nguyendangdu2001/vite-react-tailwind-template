@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist -o suborigin"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.0",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "@rbnlffl/rollup-plugin-eslint": "^1.1.4",
-    "@rollup/plugin-eslint": "^8.0.1",
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.13",
     "@types/styled-components": "^5.1.9",

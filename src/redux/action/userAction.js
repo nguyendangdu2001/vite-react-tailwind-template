@@ -1,12 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import * as userConstants from "../constants/userConstants";
-import { config } from "../../config/api";
 
 export const loginAction = (loginData, cb) => async (dispatch) => {
   dispatch({ type: userConstants.USER_LOGIN_REQUEST });
   try {
-    const { data } = await axios.post(`${config.apiGateWay}/login`, loginData);
+    const { data } = await axios.post(`/login`, loginData);
     dispatch({ type: userConstants.USER_LOGIN_SUCCESS, payload: { ...data } });
     Cookies.set("userInfo", JSON.stringify(data));
     cb(data?.user?.role);
@@ -22,10 +21,7 @@ export const loginAction = (loginData, cb) => async (dispatch) => {
 export const signupAction = (signUpData, cb) => async (dispatch) => {
   dispatch({ type: userConstants.USER_SIGNUP_REQUEST });
   try {
-    const { data } = await axios.post(
-      `${config.apiGateWay}/register`,
-      signUpData
-    );
+    const { data } = await axios.post(`/register`, signUpData);
     dispatch({ type: userConstants.USER_SIGNUP_SUCCESS, payload: { ...data } });
     Cookies.set("userInfo", JSON.stringify(data));
     cb(data?.user?.role);

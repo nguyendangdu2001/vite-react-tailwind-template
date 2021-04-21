@@ -10,8 +10,6 @@ const initialState = userInfo
       userStatus: {
         auth: true,
         userInfo: { ...userInfo },
-        loading: false,
-        error: "",
       },
     }
   : {};
@@ -20,8 +18,8 @@ export default createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
     //@ts-ignore
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
