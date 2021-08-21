@@ -13,9 +13,9 @@ export default defineConfig({
       throwOnError: true,
     }),
   ],
-  define: {
-    global: "window",
-  },
+  // define: {
+  //   global: "window",
+  // },
   resolve: {
     alias: {
       "@pages": resolve(__dirname, "./src/pages"),
@@ -24,6 +24,10 @@ export default defineConfig({
       "@action": resolve(__dirname, "./src/redux/action"),
       "@config": resolve(__dirname, "./src/config"),
       "@helper": resolve(__dirname, "./src/helper"),
+      "@assets": resolve(__dirname, "./src/assets"),
+      "@data": resolve(__dirname, "./src/data"),
+      "@redux": resolve(__dirname, "./src/redux"),
+      "@icon": resolve(__dirname, "./src/common/components/icons"),
     },
   },
 });
