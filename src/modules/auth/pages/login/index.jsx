@@ -6,9 +6,15 @@ import useRedirect from "@hooks/useRedirect";
 import { useAppSelector } from "@hooks/reduxHook";
 import { useForm } from "react-hook-form";
 import useGoogleLogin from "@modules/auth/hooks/useGoogleLogin";
+import * as yup from "yup";
 const Login = () => {
   const { mutate: login, isLoading } = useLogin();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    resolver: yup.object().shape({
+      email: yup.string().required().email(),
+      password: yup.string().required(),
+    }),
+  });
   const onFinish = (values) => {
     login(values);
   };
@@ -29,8 +35,11 @@ const Login = () => {
   });
   return (
     <div className="flex items-center justify-center h-full">
-      <form className="max-w-lg p-12 space-y-10 bg-white rounded-lg shadow-lg">
-        <div className="text-4xl font-bold font-actor">Sign up</div>
+      <form
+        className="max-w-lg p-12 space-y-10 bg-white rounded-lg shadow-lg"
+        onSubmit={handleSubmit(onFinish)}
+      >
+        <div className="text-4xl font-bold font-actor">Đăng nhập</div>
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <div className="w-1/6 h-0.5 bg-gray-500"></div>
@@ -41,6 +50,7 @@ const Login = () => {
 
           <div className="flex space-x-6">
             <button
+              type="button"
               className="flex-auto p-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg shadow text-gray-70"
               onClick={signIn}
             >
@@ -53,12 +63,6 @@ const Login = () => {
         </div>
         <div className="space-y-6">
           <input
-            {...register("name")}
-            type="text"
-            placeholder="Name"
-            className="w-full px-6 py-4 font-medium transition-colors bg-gray-100 border-0 rounded-xl dark:bg-gray-800 dark:text-gray-50"
-          />
-          <input
             {...register("email")}
             type="text"
             placeholder="Email"
@@ -66,20 +70,23 @@ const Login = () => {
           />
           <input
             {...register("password")}
-            type="text"
-            placeholder="Password"
+            type="password"
+            placeholder="Mật khẩu"
             className="w-full px-6 py-4 font-medium transition-colors bg-gray-100 border-0 rounded-xl dark:bg-gray-800 dark:text-gray-50"
           />
-          <div className="font-medium">
+          {/* <div className="font-medium">
             <label>
               <input type="checkbox" className="rounded" /> I aggree with policy
             </label>
-          </div>
+          </div> */}
         </div>
 
         <div className="grid place-content-center">
-          <button className="px-5 py-3 text-2xl font-medium tracking-widest bg-blue-500 rounded text-gray-50 font-actor">
-            Sign up
+          <button
+            type="submit"
+            className="px-5 py-3 text-2xl font-medium tracking-widest bg-blue-500 rounded text-gray-50 font-actor"
+          >
+            Đăng nhập
           </button>
         </div>
       </form>

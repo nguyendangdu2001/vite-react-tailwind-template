@@ -1,5 +1,6 @@
 import { logout } from "@action/userAction";
 import { QueryClient } from "react-query";
+import { toast } from "react-toastify";
 
 export const configReactQuery = ({ store = {} }) => {
   const qc = new QueryClient();
@@ -31,13 +32,18 @@ export const configReactQuery = ({ store = {} }) => {
           // console.log("Error", error.message);
         }
       },
+      refetchOnWindowFocus: false,
     },
     mutations: {
-      retry: (retry, err) => {
-        // console.log(JSON.parse(JSON.stringify(err)));
-        if ([401, 411, 493].includes(err?.response?.status)) return false;
-        if (retry > 3) return false;
-        return true;
+      retry: false,
+
+      onSuccess: (data) => {
+        toast.success(data?.message || "Thành công");
+      },
+      onError: (e) => {
+        toast.error(
+          e?.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại"
+        );
       },
     },
   });
