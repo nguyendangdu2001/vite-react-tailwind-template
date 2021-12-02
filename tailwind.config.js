@@ -5,12 +5,13 @@ module.exports = {
     enable: true,
     content: ["./src/**/*.{js,jsx,ts,tsx,css}", "./index.html"],
   },
-  darkMode: "media", // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {},
     fontFamily: {
       sans: ["Montserrat", "sans-serif"],
       serif: ["Merriweather", "serif"],
+      actor: ["Actor", "sans-serif"],
     },
   },
   variants: {

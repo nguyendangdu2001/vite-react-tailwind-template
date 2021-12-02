@@ -1,21 +1,26 @@
 import React, { memo } from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { Redirect, Route } from "react-router";
+import { Navigate, Route } from "react-router";
+import { useAppSelector } from "@hooks/reduxHook";
 
-const ProtectedRoute = ({ path, component: Component, exact, isPrivate, accessRole, ...rest }) => {
-  const auth = useSelector((state) => state.userStatus.auth, shallowEqual);
-  const role = useSelector((state) => state.userStatus?.userInfo?.user?.role, shallowEqual);
-  return (
-    <Route
-      render={(props) => {
-        if (!isPrivate) return <Component {...props} />;
-        if (!auth) return <Redirect to="/login" />;
-        if (!accessRole.includes(role)) return <Redirect to="/" />;
-        return <Component {...props} />;
-      }}
-      {...rest}
-    />
-  );
+const ProtectedRoute = ({ children, isPrivate, accessRole, match }) => {
+  const auth = useAppSelector((state) => state.auth.isAuth, shallowEqual);
+  const role = useAppSelector((state) => state.auth.role, shallowEqual);
+
+  if (!isPrivate) return children;
+  if (!auth) return <Navigate to={"/login"} />;
+  if (!accessRole) return children;
+  if (!accessRole.includes(role)) return <Navigate to={"/"} />;
+  // match &&
+  //   match.some(({ condition, to, cb }) => {
+  //     // console.log(condition, to);
+  //     if (condition) {
+  //       cb?.();
+  //       return <Navigate to={"/" || to} />;
+  //     }
+  //     return condition;
+  //   });
+  return children;
 };
 
 export default memo(ProtectedRoute);

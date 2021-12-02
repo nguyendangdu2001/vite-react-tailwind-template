@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const ScrollToTop = () => {
-  const history = useHistory();
+  const history = useNavigate();
   useEffect(() => {
     const unlisten = history.listen(() => {
       window.scrollTo({ left: 0, top: 0, behavior: "smooth" });

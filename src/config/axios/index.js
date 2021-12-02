@@ -1,5 +1,6 @@
 import axios from "axios";
-axios.defaults.baseURL = import.meta.env.BE_URL;
+axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.withCredentials = true;
 export const configAxios = (store) => {
   axios.interceptors.request.use(
     (config) => {

@@ -7,11 +7,16 @@
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["./src/pages/*"],
-      "@hooks/*": ["./src/common/hooks/*"],
-      "@components/*": ["./src/common/components/*"],
+      "@app/*": ["./src/app/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["./src/components/*"],
       "@action/*": ["./src/redux/action/*"],
       "@config/*": ["./src/config/*"],
-      "@helper/*": ["./src/helper/*"]
+      "@helper/*": ["./src/helper/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@services/*": ["./src/services/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "exclude": ["node_modules"]
