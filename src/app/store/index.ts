@@ -16,7 +16,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "fsdfdsddsfdsfsroot",
+  key: "sms-otp",
   version: 1,
   storage,
 };

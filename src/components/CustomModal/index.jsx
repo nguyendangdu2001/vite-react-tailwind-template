@@ -1,7 +1,19 @@
 import { Dialog, Transition } from "@headlessui/react";
+import classNames from "classnames";
 import React, { Fragment } from "react";
 
-const CustomModal = ({ isOpen, close, children, title }) => {
+const CustomModal = ({ isOpen, close, children, title, size = "md" }) => {
+  const sizeMap = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "max-w-4xl",
+    "5xl": "max-w-5xl",
+    "6xl": "max-w-6xl",
+  };
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -39,7 +51,12 @@ const CustomModal = ({ isOpen, close, children, title }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+            <div
+              className={classNames(
+                "inline-block w-full p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl",
+                sizeMap[size]
+              )}
+            >
               {title && (
                 <Dialog.Title
                   as="h3"

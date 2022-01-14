@@ -9,19 +9,26 @@ import useGoogleLogin from "@modules/auth/hooks/useGoogleLogin";
 import * as yup from "yup";
 import FormErrors from "@components/FormErrors";
 import useRegister from "@modules/auth/hooks/useRegister";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Input from "@components/Input";
 const Register = () => {
   const { mutate: registerAccount, isLoading } = useRegister();
   const { register, handleSubmit, getValues, formState } = useForm({
-    resolver: yup.object().shape({
-      email: yup.string().required().email(),
-      password: yup.string().required(),
-      rePassword: yup
-        .string()
-        .required()
-        .test("rePassword-test", "", (data) => {
-          return data === getValues("password");
-        }),
-    }),
+    resolver: yupResolver(
+      yup.object().shape({
+        email: yup
+          .string()
+          .required("Bạn phải nhập email")
+          .email("Email không đúng"),
+        password: yup.string().required("Bạn phải nhập mật khẩu"),
+        rePassword: yup
+          .string()
+          .required("Bạn phải nhập lại mật khẩu")
+          .test("rePassword-test", "mật khẩu không khớp", (data) => {
+            return data === getValues("password");
+          }),
+      })
+    ),
   });
   const onFinish = (values) => {
     registerAccount(values);
@@ -47,7 +54,7 @@ const Register = () => {
         className="max-w-lg p-12 space-y-10 bg-white rounded-lg shadow-lg"
         onSubmit={handleSubmit(onFinish)}
       >
-        <div className="text-4xl font-bold font-actor">Đăng ký</div>
+        <div className="text-4xl font-bold">Đăng ký</div>
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <div className="w-1/6 h-0.5 bg-gray-500"></div>
@@ -70,19 +77,19 @@ const Register = () => {
           </div>
         </div>
         <div className="space-y-6">
-          <input
+          <Input
             {...register("email")}
             type="text"
             placeholder="Email"
             className="w-full px-6 py-4 font-medium transition-colors bg-gray-100 border-0 rounded-xl dark:bg-gray-800 dark:text-gray-50"
           />
-          <input
+          <Input
             {...register("password")}
             type="password"
             placeholder="Mật khẩu"
             className="w-full px-6 py-4 font-medium transition-colors bg-gray-100 border-0 rounded-xl dark:bg-gray-800 dark:text-gray-50"
           />
-          <input
+          <Input
             {...register("rePassword")}
             type="password"
             placeholder="Nhập lại mật khẩu"
@@ -99,7 +106,7 @@ const Register = () => {
         <div className="grid place-content-center">
           <button
             type="submit"
-            className="px-5 py-3 text-2xl font-medium tracking-widest bg-blue-500 rounded text-gray-50 font-actor"
+            className="px-5 py-3 text-2xl font-medium tracking-wide bg-blue-500 rounded text-gray-50"
           >
             Đăng ký
           </button>

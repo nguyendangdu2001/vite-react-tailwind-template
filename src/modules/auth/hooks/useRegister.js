@@ -1,3 +1,4 @@
+import socket from "@config/socketio";
 import { useAppDispatch } from "@hooks/reduxHook";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router";
@@ -10,12 +11,17 @@ const useRegister = () => {
   return useMutation(
     async (requestData) => {
       const { data } = await register(requestData);
-      return data;
+      return await new Promise((resolve) => {
+        console.log("auth ws");
+        socket.emit("login", { token: data?.token }, (error) => {
+          resolve(data);
+        });
+      });
     },
     {
       onSuccess: (data) => {
         dispatch(loginAction(data));
-        history("/");
+        history("/projects");
       },
     }
   );

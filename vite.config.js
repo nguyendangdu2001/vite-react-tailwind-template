@@ -63,6 +63,7 @@ const config = ({ command }) => ({
       "@pages": resolve(__dirname, "./src/pages"),
       "@services": resolve(__dirname, "./src/services"),
       "@modules": resolve(__dirname, "./src/modules"),
+      "@models": resolve(__dirname, "./src/models"),
       "@routes": resolve(__dirname, "./src/routes"),
       "@app": resolve(__dirname, "./src/app"),
       "@hooks": resolve(__dirname, "./src/hooks"),
@@ -74,6 +75,7 @@ const config = ({ command }) => ({
       "@data": resolve(__dirname, "./src/data"),
       "@redux": resolve(__dirname, "./src/redux"),
       "@icon": resolve(__dirname, "./src/common/components/icons"),
+      "@defines": resolve(__dirname, "./src/defines"),
     },
   },
 });

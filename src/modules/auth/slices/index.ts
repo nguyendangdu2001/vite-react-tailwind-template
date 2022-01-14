@@ -5,6 +5,7 @@ export interface authState {
   token: string;
   user: any;
   users: any;
+  isLoading: boolean;
 }
 
 const initialState: authState = {
@@ -12,6 +13,7 @@ const initialState: authState = {
   token: "",
   user: null,
   users: [],
+  isLoading: false,
 };
 
 export const authSlice = createSlice({
@@ -24,8 +26,17 @@ export const authSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.isAuth = true;
-      state.token = action.payload?.user?.token;
-      state.user = action.payload?.user;
+      state.token = action.payload?.token;
+      state.user = action.payload;
+      state.isLoading = false;
+      localStorage.setItem("token-like168", action.payload?.token);
+    },
+    startLoginSession: (state, action) => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.isLoading = true;
     },
     users: (state, action) => {
       state.users = action.payload?.users;
@@ -34,6 +45,7 @@ export const authSlice = createSlice({
       state.isAuth = false;
       state.token = "";
       state.user = null;
+      localStorage.removeItem("token-like168");
     },
     updateToken: (state, action) => {
       state.token = action.payload?.access_token;

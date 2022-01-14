@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+  .icon-button {
+    @apply flex items-center justify-center p-3 space-x-2 text-base font-semibold transition-opacity rounded-full hover:opacity-80;
+  }
+  ._link_cs_chat {
+    color: #ffffff;
+  }
+  .icon-button__badge {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: -34px;
+    right: -20px;
+  }
+  .menu-content > * {
+    @apply w-full p-2 transition-colors rounded-md hover:bg-gray-100;
+  }
+  .custom-input {
+    @apply w-full px-6 py-4 font-medium transition-colors bg-gray-100 border-0 rounded-md dark:bg-gray-800 dark:text-gray-50;
+  }
+}

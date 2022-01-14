@@ -1,4 +1,4 @@
-import { logout } from "@action/userAction";
+import { logout } from "@modules/auth/slices";
 import { QueryClient } from "react-query";
 import { toast } from "react-toastify";
 
